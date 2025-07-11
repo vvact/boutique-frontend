@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCategories, getProducts } from "../services/api";
 import ProductCard from "../components/ProductCard";
-import "./Home.css"; // optional styling
+import '../styles/Home.css';
 import heroImage from "../assets/hero-men.jpg";
 
 function Home() {
