@@ -1,0 +1,7 @@
+
+.category-box:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
