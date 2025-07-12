@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
-import { getCategories, getProducts } from "../services/api";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"; // ✅ Added
+import { fetchCategories } from "../features/category/categorySlice";
 import ProductCard from "../components/ProductCard";
-import '../styles/Home.css';
+import "../styles/Home.css";
 import heroImage from "../assets/hero-men.jpg";
 
 function Home() {
-  const [categories, setCategories] = useState([]);
-  const [featured, setFeatured] = useState([]);
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories.items);
+  const featured = useSelector((state) =>
+    state.products.items.filter((p) => p.is_featured).slice(0, 6)
+  );
 
   useEffect(() => {
-    getCategories().then((res) => setCategories(res.data));
-    getProducts().then((res) =>
-      setFeatured(res.data.filter((p) => p.is_featured).slice(0, 6))
-    );
-  }, []);
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   return (
     <div>
-      {/* Hero Banner */}
+      {/* ✅ Hero Banner */}
       <div
         className="text-white text-center py-5"
         style={{
@@ -37,7 +38,7 @@ function Home() {
         </a>
       </div>
 
-      {/* Categories Section */}
+      {/* ✅ Categories Section */}
       <div className="container my-5">
         <h2 className="mb-4 text-center">Explore Categories</h2>
         <div className="row justify-content-center">
@@ -51,7 +52,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Featured Products */}
+      {/* ✅ Featured Products */}
       <div className="container my-5" id="featured">
         <h2 className="mb-4 text-center">Featured Pieces</h2>
         <div className="row">
@@ -61,7 +62,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Statement Section */}
+      {/* ✅ Statement Section */}
       <div className="bg-light text-center py-5">
         <h3 className="fw-semibold">
           Eastleigh Elegance. Muslim-Inspired Power.

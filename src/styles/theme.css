@@ -1,0 +1,66 @@
+/* src/styles/theme.css */
+
+/* ====== Typography ====== */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+  background-color: #f8f9fa;
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ====== Colors ====== */
+:root {
+  --primary: #000;            /* Black */
+  --secondary: #d4af37;       /* Gold */
+  --light-bg: #f2f2f2;
+  --accent: #444;
+  --text-muted: #6c757d;
+}
+
+/* ====== Buttons ====== */
+.btn-dark {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* ====== Cards & Sections ====== */
+.card-shadow {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 10px;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--primary);
+}

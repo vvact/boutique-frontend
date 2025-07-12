@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getProduct } from '../services/api';
+import { useDispatch, useSelector } from 'react-redux'; // ✅ You missed this
+import { fetchProductDetail } from '../features/product/productSlice';
 import { useCart } from '../context/CartContext';
 
 function ProductDetail() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const { addToCart } = useCart(); // ✅ access cart function
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.products.productDetail);
+  const { addToCart } = useCart();
 
   useEffect(() => {
-    getProduct(id)
-      .then((res) => setProduct(res.data))
-      .catch((err) => console.error('Failed to fetch product:', err));
-  }, [id]);
+    dispatch(fetchProductDetail(id));
+  }, [dispatch, id]);
 
   if (!product) return <p>Loading...</p>;
 
-  const imageUrl = product.image.startsWith('http')
+  const imageUrl = product.image?.startsWith('http')
     ? product.image
     : `http://localhost:8000${product.image}`;
 
@@ -34,10 +34,10 @@ function ProductDetail() {
         <h2>{product.name}</h2>
         <p className="text-muted">KSh {product.price}</p>
         <p>{product.description}</p>
-        
+
         <button
           className="btn btn-dark"
-          onClick={() => addToCart(product)} // ✅ add product to cart
+          onClick={() => addToCart(product)}
         >
           Add to Cart
         </button>
@@ -47,3 +47,5 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
+// src/pages/ProductDetail.js
+// ✅ You missed the import statement for useDispatch and useSelector
