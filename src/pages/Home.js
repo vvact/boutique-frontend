@@ -1,9 +1,19 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"; // ✅ Added
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../features/category/categorySlice";
 import ProductCard from "../components/ProductCard";
 import "../styles/Home.css";
 import heroImage from "../assets/hero-men.jpg";
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+import {
+  FaTshirt,
+  FaShoePrints,
+  FaSprayCan,
+  FaHatCowboy,
+  FaBoxes
+} from "react-icons/fa";
 
 function Home() {
   const dispatch = useDispatch();
@@ -16,6 +26,15 @@ function Home() {
     dispatch(fetchCategories());
   }, [dispatch]);
 
+  // ✅ Category Icons Mapping
+  const categoryIcons = {
+    Shirts: <FaTshirt size={32} />,
+    Pants: <FaShoePrints size={32} />,
+    Perfumes: <FaSprayCan size={32} />,
+    Hats: <FaHatCowboy size={32} />,
+    Default: <FaBoxes size={32} />
+  };
+
   return (
     <div>
       {/* ✅ Hero Banner */}
@@ -26,7 +45,7 @@ function Home() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           minHeight: "60vh",
-          backgroundColor: "#111",
+          backgroundColor: "#111"
         }}
       >
         <h1 className="display-4 fw-bold">Elevate Your Look</h1>
@@ -44,9 +63,19 @@ function Home() {
         <div className="row justify-content-center">
           {categories.map((cat) => (
             <div key={cat.id} className="col-6 col-md-3 mb-4">
-              <div className="category-box text-center p-3 border rounded shadow-sm">
-                <strong>{cat.name}</strong>
-              </div>
+              <Link
+                to={`/products?category=${encodeURIComponent(cat.name)}`}
+                className="text-decoration-none text-dark"
+              >
+                <Card className="text-center shadow-sm border-0 p-3 h-100">
+                  <div className="mb-2 text-primary">
+                    {categoryIcons[cat.name] || categoryIcons["Default"]}
+                  </div>
+                  <Card.Body>
+                    <Card.Title className="fw-bold">{cat.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
             </div>
           ))}
         </div>
