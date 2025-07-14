@@ -6,5 +6,7 @@ module.exports = {
   theme: {
     extend: {}, // ✅ Place to customize your theme (e.g., fonts, colors)
   },
-  plugins: [], // ✅ You can add Tailwind plugins like typography/forms here
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ], // ✅ You can add Tailwind plugins like typography/forms here
 }
