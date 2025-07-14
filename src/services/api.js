@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api/', // Change if needed
+  baseURL: 'http://localhost:8000/api/', // Update for production if needed
 });
 
 // 🛍️ Product-related
@@ -23,5 +23,13 @@ export const logoutUser = (token) =>
       },
     }
   );
+
+// 🧾 Orders
+export const submitOrder = (orderData, token) =>
+  API.post('orders/create/', orderData, {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  });
 
 export default API;

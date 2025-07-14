@@ -1,22 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { CartProvider } from './context/CartContext';
-import './styles/global.css';
-import './styles/theme.css';
-
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { store, persistor } from './app/store'; // ✅ Make sure persistor is imported
+import { PersistGate } from 'redux-persist/integration/react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}> {/* ✅ Use persistor */}
+      <App />
+    </PersistGate>
+  </Provider>
 );

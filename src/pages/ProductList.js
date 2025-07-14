@@ -1,6 +1,5 @@
-// src/pages/ProductList.js
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; // ✅ You forgot this
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../features/product/productSlice';
 import ProductCard from '../components/ProductCard';
 
@@ -12,13 +11,13 @@ function ProductList() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch]); // ✅ This was incorrectly closed earlier
+  }, [dispatch]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="text-center mt-5">Loading products...</p>;
+  if (error) return <p className="text-danger text-center">{error}</p>;
 
   return (
-    <div>
+    <div className="container mt-4">
       <h2 className="mb-4">Our Products</h2>
       <div className="row">
         {products.length > 0 ? (
@@ -34,4 +33,3 @@ function ProductList() {
 }
 
 export default ProductList;
-// ✅ Ensure you have the necessary imports for useDispatch and useSelector

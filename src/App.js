@@ -21,6 +21,8 @@ import Terms from "./pages/Terms";
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
+
 function App() {
   return (
     <Router>
@@ -37,6 +39,9 @@ function App() {
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/order-success" element={<OrderSuccess />} />
+          <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
+          {/* Add more routes as needed */}
+
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faqs" element={<FAQs />} />

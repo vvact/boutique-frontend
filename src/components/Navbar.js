@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
 import {
@@ -11,7 +10,8 @@ import {
 } from 'react-icons/fa';
 
 function Navbar() {
-  const { cartItems } = useCart();
+  // ✅ Get cartItems from Redux
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -26,7 +26,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
       <Link className="navbar-brand" to="/">
-        <FaStore className="me-2" />Men's Boutique
+        <FaStore className="me-2" /> MANWELL Boutique
       </Link>
 
       <div className="collapse navbar-collapse">
